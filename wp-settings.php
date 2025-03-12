@@ -3,7 +3,7 @@
  * Class for registering settings and sections and for display of the settings form(s).
  * For detailed instructions see: https://github.com/keesiemeijer/WP-Settings
  *
- * @version 2.0
+ * @version 2.1
  *
  * @author keesiemeijer
  */
@@ -240,8 +240,8 @@ if ( !class_exists( 'WP_Settings_Settings' ) ) {
 
 					$args = wp_parse_args( $opt, $defaults );
 
-					$args['default'] = ( $use_defaults ) ? $args['default'] : '';
-					$opt_defaults[ $opt['id'] ] = $args['default'];
+					$opt_default = ( $use_defaults ) ? $args['default'] : ''; //ADD
+					$opt_defaults[ $opt['id'] ] = $opt_default; //ADD
 
 					if ( in_array( $args['type'], $this->script_types ) ) {
 						$this->load_scripts[] = $args['type']; // field needs javascript
@@ -544,7 +544,7 @@ if ( !class_exists( 'WP_Settings_Settings' ) ) {
 		public function render_header( $plugin_title = '', $tab_id = false ) {
 
 			if ( !empty( $plugin_title ) )
-				echo get_screen_icon() . '<h2>' . (string) $plugin_title . '</h2>';
+				echo '<h2>' . (string) $plugin_title . '</h2>';
 
 			// if ( !$this->valid_pages )
 			//  return;

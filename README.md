@@ -44,7 +44,7 @@ See the full settings page [here](/screenshots/wp_settings.png "")
 
 It's also recommended to rename the class file names to adhere to WordPress <a href="http://make.wordpress.org/core/handbook/coding-standards/php/#naming-conventions">naming conventions</a>.
 
-See the example below and the [example plugin](/example-plugin.php "") on how to implement the settings classes.
+See the example below [simple example plugin](/example-plugin-simple.php "") and the [example plugin](/example-plugin.php "") on how to implement the settings classes.
 
 ### Example
 
@@ -389,36 +389,40 @@ Here's an example of how you can manually add admin pages without the `add_page(
 $pages = array(
 
 	/* Admin page array */
-	array(
-		'id'    => 'example_page', // required
-		'slug'  => 'example',      // required
-		'title' => __( 'Page one', 'plugin-text-domain' ),
-		'sections' => array(       // required. Array of page sections.
-
-			/* Section Array */
+		$pages = array(
+		
+			/* Admin page array */
 			array(
-				'id'     => 'section_one_settings', // required (database option name)
-				'title'  => __( 'Section One', 'plugin-text-domain' ),
-				'fields' => array(
-
-					/* Field Array */
+				'id'    => 'example_page_simple', // required
+				'slug'  => 'example_simple',      // required
+				'title' => __( 'Page one', 'plugin-text-domain' ),
+				'sections' => array(       // required. Array of page sections.
+		
+					/* Section Array */
 					array(
-						'id'    => 'text_input', // required
-						'type'  => 'text',       // required
-						'label' => 'Name',
-						'desc'  => 'Your Name',
+						'id'     => 'settings_section_one', // required (database option name)
+						'title'  => __( 'Section One', 'plugin-text-domain' ),
+						'fields' => array(
+		
+							/* Field Array */
+							array(
+								'id'    => 'text_input', // required
+								'type'  => 'text',       // required
+								'label' => 'Name',
+								'desc'  => 'Your Name',
+								'default' => 'John Doe'
+							),
+		
+							// Add more field arrays here.
+						),
 					),
-
-					// Add more field arrays here.
+		
+					// Add more section arrays here.
 				),
 			),
-
-			// Add more section arrays here.
-		),
-	),
-
-	// Add more admin page arrays here.
-);
+		
+			// Add more admin page arrays here.
+		);
 
 // Instantiate the settings class.
 $settings = new WP_Settings_Settings();

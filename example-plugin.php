@@ -1,8 +1,17 @@
 <?php
 /*
-* Plugin Name: WP Settings Example Plugin
-* Description: Commented plugin example of adding two admin pages with WP Settings.
-*/
+ * Plugin Name: WP Settings Example Plugin
+ * Description: Commented plugin example of adding two admin pages with WP Settings.
+ * Plugin URI:  		https://github.com/keesiemeijer/WP-Settings
+ * Version:           	2.1
+ * Author:            	keesiemeijer
+ * Author URI:  		https://github.com/keesiemeijer
+ * License:     		GPL-2.0+
+ * License URI:       	https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       	plugin-text-domain
+ *
+ * @package           	WP_Settings
+ */
 
 if ( is_admin() ) {
 
@@ -201,7 +210,20 @@ class WP_Settings_Example {
 					'no'    => __( 'No', 'wp-settings' ),
 					'maybe' => __( 'Maybe', 'wp-settings' ),
 				)
-			),  // end of field
+			),
+			
+			/* number */
+			array(
+				'id'      => 'section_one_number', // required
+				'type'    => 'number', // required
+				'label'   => __( 'Number', 'wp-settings' ),
+				'size'    => 'small', // defaults to regular. Sizes 'regular' - 'large' - 'small'
+				'default' => 500,
+				'min'	  => 0,
+				'max'	  => 100,
+				'step'	  => 50,
+				'desc'    => __('Number field description. The range is 0 to 1000 in increments of 50.', 'wp-settings'),
+			),	// end of fields
 		);
 
 		// Add the fields for the first admin page to the first section.

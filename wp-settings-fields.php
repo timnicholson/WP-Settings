@@ -156,6 +156,38 @@ if ( !class_exists( 'WP_Settings_Settings_Fields' ) ) {
 			echo '</fieldset>' . $html . $this->description( $args['desc'] );
 		}
 
+		/**
+		 * Displays a number input setting field.
+		 *
+		 * @param array   $args
+		 * @param string  $type Type attribute
+		 */
+		public function callback_number( $args ) {
+			$args['size'] = ( isset( $args['size'] ) && $args['size'] ) ? $args['size'] : 'regular';
+			$type = !empty( $args['text_type'] ) ? esc_attr( $args['text_type'] ) : 'number';
+			$args  = $this->get_arguments( $args ); // escapes all attributes
+			$value = (int) esc_attr( $this->get_option( $args ) );
+			$error = $this->get_setting_error( $args['id'] );
+			$min = esc_attr( $args['min'] ) ?? 0;
+			$max = esc_attr( $args['max'] );
+			$step = esc_attr( $args['step'] );
+			$min_max_step = is_numeric ( $min ) ? ' min="' . $min . '"' : '';
+			$min_max_step .= $max ? ' max="' . $max . '"' : '';
+			$min_max_step .= $step ? ' step="' . $step . '"' : '';
+			
+			$html  = sprintf( 
+				'<input type="%6$s"%7$s id="%1$s_%2$s" name="%1$s[%2$s]" value="%3$s"%4$s%5$s/>',  
+				$args['section'], 
+				$args['id'], 
+				$value, 
+				$args['attr'], 
+				$error, 
+				$type,
+				$min_max_step
+			);
+
+			echo $args['before'] . $html . $args['after'] . $this->description( $args['desc'] );
+		}
 
 		/**
 		 * Displays type 'content' field.
